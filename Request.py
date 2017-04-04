@@ -9,7 +9,7 @@ test2.write("Name, ID, Type, Phone, Location, Price, Closed, Rating, Website \n"
 
 # Got a list of all zip codes in VA from post office website.
 zip_codes = []
-zips = open("/Users/RachelRambadt/Desktop/ZipCodes.txt", "r")
+zips = open("/ZipCodes.txt", "r")
 code = zips.readline()
 while code != "":
     code = code.split()
@@ -29,7 +29,7 @@ for zip_code in zip_codes:
     access_token = token.json()['access_token']
     url = 'https://api.yelp.com/v3/businesses/search'
     headers = {'Authorization': 'bearer %s' % access_token}
-    params = {'location': zip_code,
+    params = {'location': zip_code, 'categories':'restaurants'
              }
 
     resp = requests.get(url=url, params=params, headers=headers)
