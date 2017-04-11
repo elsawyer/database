@@ -12,20 +12,22 @@
 #       Install PostgreSQL and put its /bin directory on your path.
 #
 # Configure Using Gemfile
-# gem 'pg'
+#gem 'pg'
 #
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: erynbot
-  password: p3s4a2
+  username: <%= ENV['USERNAME'] %>
+  password: <%= ENV['PASSWORD'] %>
+  host: db.cs.wm.edu
+  port: 5432
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
-  database: prod
+  database: rnrambad
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -59,7 +61,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: erynbot
+  database: rnrambad
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -82,6 +84,6 @@ test:
 #
 production:
   <<: *default
-  database: prod
-  username: erynbot
-  password: p3s4a2
+  database: rnrambad
+  username: <%= ENV['USERNAME'] %>
+  password: <%= ENV['PASSWORD'] %>
