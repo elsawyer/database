@@ -1,0 +1,12 @@
+{:uriI"zfile://app/assets/sass/README.txt?type=text/plain&id=fc18d8cf08e6326b2bceb4b08ad2037248c4bd7297a3246ab3f597868be1cb2d:ET:load_pathI"app/assets/sass;T:filenameI"app/assets/sass/README.txt;T:	nameI"README;T:logical_pathI"README.txt;T:content_typeI"text/plain;T:sourceI"0Warning! 
+
+SASS files are optional! They are not required to start working with MDB.
+
+You don't need to include them in your project.
+
+SASS are inteded for developers who are willing to modify MDB CSS code via SASS files. 
+All other users should include either mdb.css or mdb.min.css and skip SASS files.;T:metadata{	:dependencieso:Set:
+@hash}
+I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"4processors:type=text/plain&file_type=text/plain;TTI"-file-digest://app/assets/sass/README.txt;TTF:charsetI"
+utf-8;F:digest"%Í>ÔBk7o¡ŽW¢²iL£«u×!¶<ÝXîwåh:lengthi0:dependencies_digest"%‡uj/Þ¨€4Ý!g¿“ÈëŽZöÙ²óV3©Ùª&Pý:idI"Efc18d8cf08e6326b2bceb4b08ad2037248c4bd7297a3246ab3f597868be1cb2d;F:
+mtimel+HîOX
