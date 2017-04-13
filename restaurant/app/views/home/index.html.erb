@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= stylesheet_link_tag    'mdb' %>
+    <%= javascript_include_tag 'mdb' %>
+</head>
+
+<body>
+	<div class="header" style="padding-bottom: 30px;">
+		<h1><a href="/register/register">Out2Eat</a></h1>
+	</div>
+	<div class="row" >
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="card-deck">
+			  <div class="card">
+			    <img class="card-img-top" src="..." alt="Card image cap">
+			    <div class="card-block">
+			      <h4 class="card-title"><%= @suggestions[1]['name'] %></h4>
+			      <p class="card-text">Location: <%= @suggestions[1]['location'] %></p>
+			      <p class="card-text">Phone: <%= @suggestions[1]['phone'] %></p>
+			    </div>
+			  </div>
+			  <div class="card">
+			    <img class="card-img-top" src="..." alt="Card image cap">
+			    <div class="card-block">
+			      <h4 class="card-title"><%= @suggestions[2]['name'] %></h4>
+			      <p class="card-text">Location: <%= @suggestions[2]['location'] %></p>
+			      <p class="card-text">Phone: <%= @suggestions[2]['phone'] %></p>
+			    </div>
+			  </div>
+			  <div class="card">
+			    <img class="card-img-top" src="..." alt="Card image cap">
+			    <div class="card-block">
+			      <h4 class="card-title"><%= @suggestions[3]['name'] %></h4>
+			      <p class="card-text">Location: <%= @suggestions[3]['location'] %></p>
+			      <p class="card-text">Phone: <%= @suggestions[3]['phone'] %></p>
+			    </div>
+			  </div>
+			</div>
+		</div>
+
+		<div class="col-md-1"></div>
+	</div>
+
+    <!-- /Start your project here-->
+
+</body>
+
+</html>
