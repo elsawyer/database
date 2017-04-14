@@ -10,9 +10,15 @@
     <%= javascript_include_tag 'application' %>
     <%= stylesheet_link_tag    'mdb' %>
     <%= javascript_include_tag 'mdb' %>
+    <%= javascript_include_tag 'geoStuff' %>
 </head>
 
 <body>
+	<%- unless @lat_lng %>
+	<script>
+		getGeoLocation();
+	</script>
+	<%- end %>
 	<div class="header" style="padding-bottom: 30px;">
 		<h1><a href="/register/register">Out2Eat</a></h1>
 	</div>
