@@ -29,27 +29,30 @@
 			  <div class="card">
 			    <img class="card-img-top" src="..." alt="Card image cap">
 			    <div class="card-block">
+			      <h4 class="card-title"><%= @suggestions[0]['name'] %></h4>
+			      <p class="card-text">Location: <%= @suggestions[0]['location'] %></p>
+			      <p class="card-text">Phone: <%= @suggestions[0]['phone'] %></p>
+			    </div>
+			  </div>
+			  <div class="card">
+			    <img class="card-img-top" src="..." alt="Card image cap">
+			    <div class="card-block">
 			      <h4 class="card-title"><%= @suggestions[1]['name'] %></h4>
 			      <p class="card-text">Location: <%= @suggestions[1]['location'] %></p>
 			      <p class="card-text">Phone: <%= @suggestions[1]['phone'] %></p>
 			    </div>
 			  </div>
-			  <div class="card">
-			    <img class="card-img-top" src="..." alt="Card image cap">
-			    <div class="card-block">
-			      <h4 class="card-title"><%= @suggestions[2]['name'] %></h4>
-			      <p class="card-text">Location: <%= @suggestions[2]['location'] %></p>
-			      <p class="card-text">Phone: <%= @suggestions[2]['phone'] %></p>
-			    </div>
-			  </div>
-			  <div class="card">
-			    <img class="card-img-top" src="..." alt="Card image cap">
-			    <div class="card-block">
-			      <h4 class="card-title"><%= @suggestions[3]['name'] %></h4>
-			      <p class="card-text">Location: <%= @suggestions[3]['location'] %></p>
-			      <p class="card-text">Phone: <%= @suggestions[3]['phone'] %></p>
-			    </div>
-			  </div>
+			  <% if @suggestions[2] %>
+				  <div class="card">
+				    <img class="card-img-top" src="..." alt="Card image cap">
+				    <div class="card-block">
+				      <h4 class="card-title"><%= @suggestions[2]['name'] %></h4>
+				      <p class="card-text">Location: <%= @suggestions[2]['location'] %></p>
+				      <p class="card-text">Phone: <%= @suggestions[2]['phone'] %></p>
+				    </div>
+				  </div>
+			<% end %>
+
 			</div>
 		</div>
 

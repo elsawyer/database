@@ -22,11 +22,11 @@ class HomeController < ApplicationController
 		state  = addr[2].split(" ")[0].strip()
 		cityState = "%" + city + " " + state + "%"
 		print cityState
+
   		#order by random helps keep us from offering same suggestion every time
-  		#restaurants = self.connection_select_value("SELECT * FROM restaurant_vital ORDER BY RANDOM() LIMIT 4 ")
-  		#query = "SELECT * FROM restaurant_vital LIMIT 10"
-  		#@suggestions = RestaurantVital.connection.execute(query)
-    	#@suggestions = RestaurantVital.limit(4)
-    	@suggestions = RestaurantVital.where("restaurant_type ilike any ( array[?] ) AND location like ?", prefs, cityState).limit(4).order("RANDOM()")
+  		#distance function is loaded into db - uses the Haversine formula to calculate linear distance between longs and lats
+    	@suggestions = RestaurantVital.where("restaurant_type ilike any ( array[?] ) AND location like ?", prefs, cityState).where(" ( distance ( latitude::REAL, longitude::REAL, ?::REAL, ?::REAL ) / 1609.344 ) <= 3", lat, long).limit(4).order("RANDOM()")
+    	print @suggestions.length
+   		print
   	end
 end
