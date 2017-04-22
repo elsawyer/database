@@ -204,6 +204,14 @@ form .form-check {
 	text-align: left;
 }
 
+form .form-first-name {
+	width: 425px !important;
+}
+
+form .form-ZIP {
+	width: 425px !important;
+}
+
 form .form-check-final {
 	padding: 0px 0px 15px 5px;
 }

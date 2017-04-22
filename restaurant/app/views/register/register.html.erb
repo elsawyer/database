@@ -70,7 +70,7 @@
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3 form-box">
                         	
-                        	<form role="form" action="" method="post" class="registration-form">
+                        	<form role="form" action="" class="registration-form" action="/register/register">
                         		
                         		<fieldset>
 		                        	<div class="form-top">
@@ -84,11 +84,11 @@
 		                            <div class="form-bottom">
 				                    	<div class="form-group">
 				                    		<label class="sr-only" for="form-first-name">First name</label>
-				                        	<input type="text" name="form-first-name" placeholder="Name..." class="form-first-name form-control">
+				                        	<input type="text" placeholder="Name..." name="form_first_name" onfocus="if(this.value == 'Name...') { this.value = ''; }" class="form-first-name form-control">
 				                        </div>
 				                        <div class="form-group">
 				                        	<label class="sr-only" for="form-about-yourself">Zip Code</label>
-				                        	<input type="text" name="form-ZIP" placeholder="ZIP Code" 
+				                        	<input type="text" name="form_ZIP" placeholder="ZIP Code" 
 				                        				class="form-ZIP form-control" id="ZIP">
 				                        </div>
 				                        <button type="button" class="btn btn-next">Next</button>
@@ -107,55 +107,55 @@
 		                            <div class="form-bottom">
 				                    	<div class="form-check">
 										<label class="form-check-label">
-										  <input type="checkbox" class="form-check-input" id="italian" value="option1">
+										  <input type="checkbox" class="form-check-input" name="italian" id="italian" value="option1">
 										  Italian
 										</label>
 										</div>	
 				                        <div class="form-check">
 										<label class="form-check-label">
-										  <input type="checkbox" class="form-check-input" id="mediterranean" value="option2">
+										  <input type="checkbox" class="form-check-input" name="mediterranean" id="mediterranean" value="option2">
 										  Mediterranean
 										</label>
 										</div>
 				                        <div class="form-check">
 										<label class="form-check-label">
-										  <input type="checkbox" class="form-check-input" id="mexican" value="option3">
+										  <input type="checkbox" class="form-check-input" name="mexican" id="mexican" value="option3">
 										  Mexican
 										</label>
 										</div>
 				                        <div class="form-check">
 										<label class="form-check-label">
-										  <input type="checkbox" class="form-check-input" id="chinese" value="option3">
+										  <input type="checkbox" class="form-check-input" name="chinese" id="chinese" value="option3">
 										  Chinese
 										</label>
 										</div>
 				                        <div class="form-check">
 										<label class="form-check-label">
-										  <input type="checkbox" class="form-check-input" id="breakfast" value="option3">
+										  <input type="checkbox" class="form-check-input" name="breakfast" id="breakfast" value="option3">
 										  Breakfast
 										</label>
 										</div>
 										<div class="form-check">
 										<label class="form-check-label">
-										  <input type="checkbox" class="form-check-input" id="american" value="option3">
+										  <input type="checkbox" class="form-check-input" name="american" id="american" value="option3">
 										  American
 										</label>
 										</div>
 										<div class="form-check">
 										<label class="form-check-label">
-										  <input type="checkbox" class="form-check-input" id="fast food" value="option3">
+										  <input type="checkbox" class="form-check-input" name="fast_food" id="fast food" value="option3">
 										  Fast Food
 										</label>
 										</div>
 										<div class="form-check">
 										<label class="form-check-label">
-										  <input type="checkbox" class="form-check-input" id="sushi" value="option3">
+										  <input type="checkbox" class="form-check-input" name="sushi" id="sushi" value="option3">
 										  Sushi
 										</label>
 										</div>
 										<div class="form-check-final">
 										<label class="form-check-label">
-										  <input type="checkbox" class="form-check-input" id="indian" value="option3">
+										  <input type="checkbox" class="form-check-input" name="indian" id="indian" value="option3">
 										  Indian
 										</label>
 										</div>
@@ -176,13 +176,14 @@
 		                            </div>
 		                            <div class="form-bottom">
 										<div style="text-align: center;" class="slider" id=moneyslider>
-											<input type="range" min="1" max="4" value="1" step="1" onchange="showValue(this.value)" />
+											<input type="range" id="money_slide" name="money_slide" min="1" max="4" value="1" step="1" onchange="showValue(this.value)" />
 											<span id="range">$</span>
 											<script type="text/javascript">
 											function showValue(newValue)
 											{
 												var x = "$";
-												document.getElementById("range").innerHTML = x.repeat(newValue);										
+												document.getElementById("range").innerHTML = x.repeat(newValue);
+												document.getElementById("money_slide") = newValue										
 											}
 											</script>
 										</div>
@@ -203,19 +204,19 @@
 		                            <div class="form-bottom">
 				                        <div class="form-group">
 				                        	<label class="sr-only" for="form-email">Email</label>
-				                        	<input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
+				                        	<input type="text" name="form_email" placeholder="Email..." class="form-email form-control" id="form-email">
 				                        </div>
 				                        <div class="form-group">
 				                    		<label class="sr-only" for="form-password">Password</label>
-				                        	<input type="password" name="form-password" placeholder="Password..." onclick = "" class="form-password form-control" id="form-password">
+				                        	<input type="password" name="form_password" placeholder="Password..." onclick = "" class="form-password form-control" id="form-password">
 				                        </div>
 				                        <div class="form-group">
-				                        	<label class="sr-only" for="form-repeat-password">Repeat password</label>
+				                        	<label class="sr-only" for="form_repeat_password">Repeat password</label>
 				                        	<input type="password" name="form-repeat-password" placeholder="Repeat password..." 
 				                        				class="form-repeat-password form-control" id="form-repeat-password">
 				                        </div>
 				                        <button type="button" class="btn btn-previous">Previous</button>
-				                        <button type="submit" class="btn">Show results!</button>
+				                        <button type="submit" class="btn" formaction="/register/register">Show results!</button>
 				                    </div>
 			                    </fieldset>
 			                    
