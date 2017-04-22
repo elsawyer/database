@@ -1,5 +1,6 @@
 function getGeoLocation() {
-  navigator.geolocation.getCurrentPosition(setGeoCookie);
+	console.log("here\n")
+  	navigator.geolocation.getCurrentPosition(setGeoCookie);
 }
 
 function setGeoCookie(position) {

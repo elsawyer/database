@@ -3,12 +3,20 @@ class HomeController < ApplicationController
 	def index
 		#TODO: if no permission, maybe link to an error page - rn probably sleeps forever
 
+		#print("got to controller")
+		#while (!cookies[:lat_lng]) 
+		# 	sleep(1)
+		#end
+		#print("got past sleep")
+
+
 		@user = 'test'
 
 		#turn cookies into array
 		#@lat_lng = cookies[:lat_lng].split("|")
 		#lat = (@lat_lng[0]).to_f
 		#long = (@lat_lng[1]).to_f
+		
 		lat = request.location.latitude
 		long = request.location.longitude 
 
