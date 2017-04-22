@@ -2,19 +2,23 @@ class HomeController < ApplicationController
 	def index
 		#sleep until HTML 5 gets permission for location tracking
 		#TODO: if no permission, maybe link to an error page - rn probably sleeps forever
-		while (!cookies[:lat_lng]) 
-			sleep(1)
-		end
+		#print("got to controller")
+		#while (!cookies[:lat_lng]) 
+		# 	sleep(1)
+		#end
+		#print("got past sleep")
 
 		 
 
 		#turn cookies into array
-		@lat_lng = cookies[:lat_lng].split("|")
-		lat = (@lat_lng[0]).to_f
-		long = (@lat_lng[1]).to_f
+		#@lat_lng = cookies[:lat_lng].split("|")
+		#lat = (@lat_lng[0]).to_f
+		#long = (@lat_lng[1]).to_f
 
 		#hardcoded prefs for now
 		prefs = ["%italian%", "%sushi%"]
+		lat = 37.272260
+		long = -76.707002
 
 		addr = Geocoder.address([lat, long]).split(",")
 		city = addr[1].strip()

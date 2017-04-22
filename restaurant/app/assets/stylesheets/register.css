@@ -1,12 +1,18 @@
 
 /*TODO: Fix fonts*/
 body {
-/*    font-family: 'Roboto', sans-serif;*/
+	font-family: 'Roboto', sans-serif;
+	overflow: auto !important;
     font-size: 16px;
     font-weight: 300;
     color: #888;
     line-height: 30px;
     text-align: center;
+	background: url("1.jpg") center center;
+	background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+	
 }
 
 strong { font-weight: 500; }
@@ -21,7 +27,7 @@ h1, h2 {
 	margin-top: 10px;
 	font-size: 38px;
     font-weight: 100;
-    color: #555;
+    color: #FFF;
     line-height: 50px;
 }
 
@@ -78,7 +84,7 @@ img { max-width: 100%; }
 	border: 0;
 	-o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
 }
-.navbar.navbar-no-bg { background: none; }
+.navbar.navbar-no-bg { background: #043657; }
 
 ul.navbar-nav {
 	font-size: 16px;
@@ -202,6 +208,9 @@ form .form-check-final {
 	padding: 0px 0px 15px 5px;
 }
 
+.slider {
+	margin: 30px 0px 30px 0px;
+}
 
 /***** Media queries *****/
 
