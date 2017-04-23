@@ -18,7 +18,7 @@ class RegisterController < ApplicationController
 		@indian = params[:indian]
 		@price = params[:money_slide]
 		@email = params[:form_email]
-		@user= @name
+		session[:user] = @email
 
 		#create new user in the database
 		#User.create({ :userid => @email, :maxprice => @price, :zip => @zip.to_i })
@@ -53,6 +53,6 @@ class RegisterController < ApplicationController
 			Userlike.create(:userid=>@email, :foodlike=>"indpak", :islike=>TRUE)
 		end
 
-		redirect_to 'home/index' and return
+		redirect_to :home_index
 	end
 end

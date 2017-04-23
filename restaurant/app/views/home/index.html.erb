@@ -11,14 +11,23 @@
     <%= stylesheet_link_tag    'mdb' %>
     <%= javascript_include_tag 'mdb' %>
     <%= javascript_include_tag 'geoStuff' %>
+    <%= javascript_include_tag 'maps' %>
 </head>
 
 <body>
+	<script src="//maps.google.com/maps/api/js?key=AIzaSyD-oQfRLDi3Rct-Q5lPOkw7yXY52kmklRY"></script>
+	<script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
 	<%- unless @lat_lng %>
 	<script>
 		getGeoLocation();
 	</script>
 	<%- end %>
+	<script>
+    	markers = handler.addMarkers(<%=raw @hash.to_json %>);
+    	handler.buildMap();
+    	console.log('after handler.markers')
+    	console.log(markers.lat)
+	</script>
 	<div class="header" style="padding-bottom: 30px;">
 		<h1><a href="/home/index">Out2Eat</a></h1>
 	</div>
@@ -27,10 +36,12 @@
 		<div class="col-md-10">
 			<div class="card-deck">
 			  <div class="card">
-			    <img class="card-img-top" src="..." alt="Card image cap">
+			  	<div class="card-img-top" style='width: 800px;'>
+  					<div id="map" style='width: 800px; height: 400px;'></div>
+				</div>
 			    <div class="card-block">
 			      <h4 class="card-title"><%= @suggestions[0]['name'] %></h4>
-			      <p class="card-text">Location: <%= @suggestions[0]['location'] %></p>
+			      <p class="card-text">Location: <%= @suggestions[0]['address'] %></p>
 			      <p class="card-text">Phone: <%= @suggestions[0]['phone'] %></p>
 			    </div>
 			  </div>
@@ -38,7 +49,7 @@
 			    <img class="card-img-top" src="..." alt="Card image cap">
 			    <div class="card-block">
 			      <h4 class="card-title"><%= @suggestions[1]['name'] %></h4>
-			      <p class="card-text">Location: <%= @suggestions[1]['location'] %></p>
+			      <p class="card-text">Location: <%= @suggestions[1]['address'] %></p>
 			      <p class="card-text">Phone: <%= @suggestions[1]['phone'] %></p>
 			    </div>
 			  </div>
@@ -47,7 +58,7 @@
 				    <img class="card-img-top" src="..." alt="Card image cap">
 				    <div class="card-block">
 				      <h4 class="card-title"><%= @suggestions[2]['name'] %></h4>
-				      <p class="card-text">Location: <%= @suggestions[2]['location'] %></p>
+				      <p class="card-text">Location: <%= @suggestions[2]['address'] %></p>
 				      <p class="card-text">Phone: <%= @suggestions[2]['phone'] %></p>
 				    </div>
 				  </div>

@@ -1,10 +1,6 @@
 class HomeController < ApplicationController
 
 	def index
-		print("MADE IT TO HOME")
-		render :home
-		#TODO: if no permission, maybe link to an error page - rn probably sleeps forever
-
 		#print("got to controller")
 		#while (!cookies[:lat_lng]) 
 		# 	sleep(1)
@@ -15,6 +11,8 @@ class HomeController < ApplicationController
 		#@lat_lng = cookies[:lat_lng].split("|")
 		#lat = (@lat_lng[0]).to_f
 		#long = (@lat_lng[1]).to_f
+		@user = session[:user]
+		#@user = "test124"
 
 		lat = request.location.latitude
 		long = request.location.longitude 
@@ -77,7 +75,7 @@ class HomeController < ApplicationController
 
 		formatStr = "HH24:MI"
 
-		times = Restauranttime.where("day = weekday AND to_timestamp(?) < close AND to_timestamp(?) > open", weekDay, curTime)
+		#times = Restauranttime.where("day = weekday AND to_timestamp(?) < close AND to_timestamp(?) > open", weekDay, curTime)
 
   		#order by random helps keep us from offering same suggestion every time
   		#distance function is loaded into db - uses the Haversine formula to calculate linear distance between longs and lats
@@ -104,6 +102,13 @@ class HomeController < ApplicationController
     			print "FOUND A REC!\n\n"
     		end
     	end
+
+    	@hash = Gmaps4rails.build_markers(@suggestions) do |suggestion, marker|
+    		print(suggestion["latitude"])
+    		print "LATITUDE ABOVE\n\n"
+  			marker.lat suggestion["latitude"]
+  			marker.lng suggestion["longitude"]
+		end
 
     	#query using homelat/homelong - preload data for toggle
     	#@home_suggestions = RestaurantVital.where("restaurant_type ilike any ( array[?] ) AND location like ?", prefsStr, homeCityState).where(" ( distance ( latitude::REAL, longitude::REAL, ?::REAL, ?::REAL ) / 1609.344 ) <= 25", homelat, homelong).limit(3).order("RANDOM()")
