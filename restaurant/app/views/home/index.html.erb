@@ -8,36 +8,20 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-    <%= stylesheet_link_tag    'mdb' %>
-    <%= javascript_include_tag 'mdb' %>
     <%= javascript_include_tag 'geoStuff' %>
-    <%= javascript_include_tag 'maps' %>
 </head>
 
 <body>
-	<script src="//maps.google.com/maps/api/js?key=AIzaSyD-oQfRLDi3Rct-Q5lPOkw7yXY52kmklRY"></script>
-	<script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
-	<%- unless @lat_lng %>
-	<script>
-		getGeoLocation();
-	</script>
-	<%- end %>
-	<script>
-    	markers = handler.addMarkers(<%=raw @hash.to_json %>);
-    	handler.buildMap();
-    	console.log('after handler.markers')
-    	console.log(markers.lat)
-	</script>
 	<div class="header" style="padding-bottom: 30px;">
-		<h1><a href="/home/index">Out2Eat</a></h1>
+		<h1 style="padding-top: 20px"><a href="/home/index" style="text-decoration:none;color:#fffff!important;">Out2Eat</a></h1>
 	</div>
 	<div class="row" >
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
-			<div class="card-deck">
+			<div class="card-deck" style="padding-bottom:80px">
 			  <div class="card">
-			  	<div class="card-img-top" style='width: 800px;'>
-  					<div id="map" style='width: 800px; height: 400px;'></div>
+			  	<div class="card-img-top" style='width: 100%;'>
+  					<img style="width:100%" src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @suggestions[0]['address'] %>&zoom=17&scale=false&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C<%= @suggestions[0]['address'] %>">
 				</div>
 			    <div class="card-block">
 			      <h4 class="card-title"><%= @suggestions[0]['name'] %></h4>
@@ -46,7 +30,9 @@
 			    </div>
 			  </div>
 			  <div class="card">
-			    <img class="card-img-top" src="..." alt="Card image cap">
+			  	<div class="card-img-top" style='width: 100%;'>
+  					<img style="width:100%" src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @suggestions[1]['address'] %>&zoom=17&scale=false&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C<%= @suggestions[1]['address'] %>">
+				</div>
 			    <div class="card-block">
 			      <h4 class="card-title"><%= @suggestions[1]['name'] %></h4>
 			      <p class="card-text">Location: <%= @suggestions[1]['address'] %></p>
@@ -55,7 +41,9 @@
 			  </div>
 			  <% if @suggestions[2] %>
 				  <div class="card">
-				    <img class="card-img-top" src="..." alt="Card image cap">
+				    <div class="card-img-top" style='width: 100%;'>
+  						<img style="width:100%" src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @suggestions[2]['address'] %>&zoom=17&scale=false&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C<%= @suggestions[2]['address'] %>">
+					</div>
 				    <div class="card-block">
 				      <h4 class="card-title"><%= @suggestions[2]['name'] %></h4>
 				      <p class="card-text">Location: <%= @suggestions[2]['address'] %></p>

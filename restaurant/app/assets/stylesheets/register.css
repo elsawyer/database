@@ -31,6 +31,16 @@ h1, h2 {
     line-height: 50px;
 }
 
+h4 {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	font-weight: bold;
+}
+
+p{
+	padding-bottom: 5px;
+}
+
 h3 {
 	font-size: 22px;
     font-weight: 300;
@@ -209,6 +219,21 @@ form .form-first-name {
 }
 
 form .form-ZIP {
+	width: 425px !important;
+}
+
+form .form-repeat-password{
+
+	width: 425px !important;
+}
+
+form .form-password{
+
+	width: 425px !important;
+}
+
+form .form-email{
+
 	width: 425px !important;
 }
 
