@@ -79,7 +79,7 @@ class HomeController < ApplicationController
 
   		#order by random helps keep us from offering same suggestion every time
   		#distance function is loaded into db - uses the Haversine formula to calculate linear distance between longs and lats
-    	@suggestions = RestaurantVital.where("restaurant_vital.restaurant_type ilike any ( array[?] ) AND ( distance ( latitude::REAL, longitude::REAL, ?::REAL, ?::REAL ) / 1609.344 ) <= 50", prefsStr, lat, long).joins("JOIN restaurant_theme ON restaurant_vital.id = restaurant_theme.id JOIN restaurant_times ON restaurant_times.id = restaurant_vital.id").where("char_length(price) <= ? AND rating::REAL >= 3.0", maxPrice).where("day like ? AND to_timestamp(?, ?)::time without time zone BETWEEN open AND close", weekDay, curTime, formatStr).limit(3).order("RANDOM()")
+    	@suggestions = RestaurantVital.where("restaurant_vital.restaurant_type ilike any ( array[?] ) AND ( distance ( latitude::REAL, longitude::REAL, ?::REAL, ?::REAL ) / 1609.344 ) <= 5", prefsStr, lat, long).joins("JOIN restaurant_theme ON restaurant_vital.id = restaurant_theme.id JOIN restaurant_times ON restaurant_times.id = restaurant_vital.id").where("char_length(price) <= ? AND rating::REAL >= 3.0", maxPrice).where("day like ? AND to_timestamp(?, ?)::time without time zone BETWEEN open AND close", weekDay, curTime, formatStr).limit(3).order("RANDOM()")
 
     	#try to handle "dead zones" where user's preferences are too specific for the area
     	if @suggestions.length < 2
@@ -91,7 +91,7 @@ class HomeController < ApplicationController
     		end
     		#if user is willing to increase price first, drop price constraint
     		if distance == 0
-    			@suggestions = RestaurantVital.where("restaurant_vital.restaurant_type ilike any ( array[?] ) AND ( distance ( latitude::REAL, longitude::REAL, ?::REAL, ?::REAL ) / 1609.344 ) <= 50", prefsStr, lat, long).joins("JOIN restaurant_theme ON restaurant_vital.id = restaurant_theme.id JOIN restaurant_times ON restaurant_times.id = restaurant_vital.id").where("rating::REAL >= 3.0").where("day = ? AND to_timestamp(?, ?)::time without time zone BETWEEN open AND close", weekDay, curTime, formatStr).limit(3).order("RANDOM()")
+    			@suggestions = RestaurantVital.where("restaurant_vital.restaurant_type ilike any ( array[?] ) AND ( distance ( latitude::REAL, longitude::REAL, ?::REAL, ?::REAL ) / 1609.344 ) <= 5", prefsStr, lat, long).joins("JOIN restaurant_theme ON restaurant_vital.id = restaurant_theme.id JOIN restaurant_times ON restaurant_times.id = restaurant_vital.id").where("rating::REAL >= 3.0").where("day = ? AND to_timestamp(?, ?)::time without time zone BETWEEN open AND close", weekDay, curTime, formatStr).limit(3).order("RANDOM()")
     		end
     	end
 
