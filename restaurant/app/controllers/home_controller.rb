@@ -37,10 +37,6 @@ class HomeController < ApplicationController
 		#userid is a primary key, so we get a single tuple here
 		userData = User.where("userid = ?", @user)[0]
 		maxPrice = userData["maxprice"]
-		drinks = userData["drinks"]
-		homelat = userData["homelat"]
-		homelong = userData["homelong"]
-		distance = 0
 
 		#query the userlikes db to get user selected preferences
 		userPrefs = Userlike.select("foodlike").where("userid = ? AND isLike=TRUE", @user)
@@ -102,13 +98,6 @@ class HomeController < ApplicationController
     			print "FOUND A REC!\n\n"
     		end
     	end
-
-    	@hash = Gmaps4rails.build_markers(@suggestions) do |suggestion, marker|
-    		print(suggestion["latitude"])
-    		print "LATITUDE ABOVE\n\n"
-  			marker.lat suggestion["latitude"]
-  			marker.lng suggestion["longitude"]
-		end
 
     	#query using homelat/homelong - preload data for toggle
     	#@home_suggestions = RestaurantVital.where("restaurant_type ilike any ( array[?] ) AND location like ?", prefsStr, homeCityState).where(" ( distance ( latitude::REAL, longitude::REAL, ?::REAL, ?::REAL ) / 1609.344 ) <= 25", homelat, homelong).limit(3).order("RANDOM()")
