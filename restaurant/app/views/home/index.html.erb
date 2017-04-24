@@ -23,7 +23,7 @@
 			<div class="card-deck" style="padding-bottom:80px">
 			  <div class="card">
 			  	<div class="card-img-top" style='width: 100%;'>
-  					<img style="width:100%" src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @suggestions[0]['address'] %>&zoom=17&scale=false&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C<%= @suggestions[0]['address'] %>">
+  					<img style="width:100%" src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @suggestions[0]['address']gsub!(' ', '%20')  %>&zoom=17&scale=false&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C<%= @suggestions[0]['address'] %>">
 				</div>
 			    <div class="card-block">
 			      <h4 class="card-title"><%= @suggestions[0]['name'] %></h4>
@@ -33,7 +33,7 @@
 			  </div>
 			  <div class="card">
 			  	<div class="card-img-top" style='width: 100%;'>
-  					<img style="width:100%" src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @suggestions[1]['address'] %>&zoom=17&scale=false&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C<%= @suggestions[1]['address'] %>">
+  					<img style="width:100%" src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @suggestions[1]['address']gsub!(' ','%20')  %>&zoom=17&scale=false&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C<%= @suggestions[1]['address'] %>">
 				</div>
 			    <div class="card-block">
 			      <h4 class="card-title"><%= @suggestions[1]['name'] %></h4>
@@ -44,7 +44,7 @@
 			  <% if @suggestions[2] %>
 				  <div class="card">
 				    <div class="card-img-top" style='width: 100%;'>
-  						<img style="width:100%" src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @suggestions[2]['address'] %>&zoom=17&scale=false&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C<%= @suggestions[2]['address'] %>">
+  						<img style="width:100%" src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @suggestions[2]['address']gsub!(' ','%20')  %>&zoom=17&scale=false&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C<%= @suggestions[2]['address'] %>">
 					</div>
 				    <div class="card-block">
 				      <h4 class="card-title"><%= @suggestions[2]['name'] %></h4>
