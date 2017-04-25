@@ -201,15 +201,28 @@
 		                        		<div class="form-top-right">
 		                        		</div>
 		                            </div>
+		                            <script type="text/javascript">
+											function showPreference(){
+												var x = "Pay More Money";
+												var y = "0";
+												if(document.getElementById("outlier").checked){
+													x = "Travel Further";
+													y = "1";
+												}
+												document.getElementById("outlierText").innerHTML = x;
+												document.getElementById("outlier").value = y;
+											}
+											</script>
 		                            <div class="form-bottom">
 										<div class="outlier">
 				                        <label class="switch">
 											<input type="checkbox" name="outlier" value="0" onchange="showPreference()" id="outlier">
 											<div class="slider outlier round"></div>
 										</label>
+
 										</div>
 										<div class="outlierTextBox">
-											<span id="outlierText" >Travel Further</span>
+											<span id="outlierText" >Pay More Money</span>
 											</div>
 											<script type="text/javascript">
 											function showPreference(){
