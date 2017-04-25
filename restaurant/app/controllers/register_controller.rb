@@ -18,11 +18,14 @@ class RegisterController < ApplicationController
 		@indian = params[:indian]
 		@price = params[:money_slide]
 		@email = params[:form_email]
+		@outlier = params[:outlier]
 		session[:user] = @email
 
+		print "OUTLIER"
+		print @outlier
 		#create new user in the database
 		#User.create({ :userid => @email, :maxprice => @price, :zip => @zip.to_i })
-		User.create({userid: @email, maxprice: @price.to_i, zip: @zip.to_i})
+		User.create({userid: @email, maxprice: @price.to_i, zip: @zip.to_i, travel: @outlier})
 
 		#add to user likes as necessary - convert type of food to yelp keyword
 		if @italian
