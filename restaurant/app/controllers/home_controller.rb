@@ -77,7 +77,7 @@ class HomeController < ApplicationController
 
   		#order by random helps keep us from offering same suggestion every time
   		#distance function is loaded into db - uses the Haversine formula to calculate linear distance between longs and lats
-    	@suggestions = RestaurantVital.where("restaurant_vital.restaurant_type ilike any ( array[?] ) AND ( distance ( latitude::REAL, longitude::REAL, ?::REAL, ?::REAL ) / 1609.344 ) <= 5", prefsStr, lat, long).joins("JOIN restaurant_theme ON restaurant_vital.id = restaurant_theme.id JOIN restaurant_times ON restaurant_times.id = restaurant_vital.id").where("char_length(price) <= ? AND rating::REAL >= 3.0", maxPrice).where("day like ? AND to_timestamp(?, ?)::time without time zone BETWEEN open AND close", weekDay, curTime, formatStr).limit(3).order("RANDOM()")
+    	@suggestions = RestaurantVital.select("*").where("restaurant_vital.restaurant_type ilike any ( array[?] ) AND ( distance ( latitude::REAL, longitude::REAL, ?::REAL, ?::REAL ) / 1609.344 ) <= 5", prefsStr, lat, long).joins("JOIN restaurant_theme ON restaurant_vital.id = restaurant_theme.id JOIN restaurant_times ON restaurant_times.id = restaurant_vital.id").where("char_length(price) <= ? AND rating::REAL >= 3.0", maxPrice).where("day like ? AND to_timestamp(?, ?)::time without time zone BETWEEN open AND close", weekDay, curTime, formatStr).limit(3).order("RANDOM()")
 
     	#try to handle "dead zones" where user's preferences are too specific for the area
     	if @suggestions.length < 2
@@ -86,11 +86,11 @@ class HomeController < ApplicationController
     		print(distance)
     		#if user is willing to travel first, then increase distance by 10 miles
     		if distance == true
-    			@suggestions = RestaurantVital.where("restaurant_vital.restaurant_type ilike any ( array[?] ) AND ( distance ( latitude::REAL, longitude::REAL, ?::REAL, ?::REAL ) / 1609.344 ) <= 15", prefsStr, lat, long).joins("JOIN restaurant_theme ON restaurant_vital.id = restaurant_theme.id JOIN restaurant_times ON restaurant_times.id = restaurant_vital.id").where("char_length(price) <= ? AND rating::REAL >= 3.0", maxPrice).where("day = ? AND to_timestamp(?, ?)::time without time zone BETWEEN open AND close", weekDay, curTime, formatStr).limit(3).order("RANDOM()")
+    			@suggestions = RestaurantVital.select("*").where("restaurant_vital.restaurant_type ilike any ( array[?] ) AND ( distance ( latitude::REAL, longitude::REAL, ?::REAL, ?::REAL ) / 1609.344 ) <= 15", prefsStr, lat, long).joins("JOIN restaurant_theme ON restaurant_vital.id = restaurant_theme.id JOIN restaurant_times ON restaurant_times.id = restaurant_vital.id").where("char_length(price) <= ? AND rating::REAL >= 3.0", maxPrice).where("day = ? AND to_timestamp(?, ?)::time without time zone BETWEEN open AND close", weekDay, curTime, formatStr).limit(3).order("RANDOM()")
     		end
     		#if user is willing to increase price first, drop price constraint
     		if distance == false
-    			@suggestions = RestaurantVital.where("restaurant_vital.restaurant_type ilike any ( array[?] ) AND ( distance ( latitude::REAL, longitude::REAL, ?::REAL, ?::REAL ) / 1609.344 ) <= 5", prefsStr, lat, long).joins("JOIN restaurant_theme ON restaurant_vital.id = restaurant_theme.id JOIN restaurant_times ON restaurant_times.id = restaurant_vital.id").where("rating::REAL >= 3.0").where("day = ? AND to_timestamp(?, ?)::time without time zone BETWEEN open AND close", weekDay, curTime, formatStr).limit(3).order("RANDOM()")
+    			@suggestions = RestaurantVital.select("*").where("restaurant_vital.restaurant_type ilike any ( array[?] ) AND ( distance ( latitude::REAL, longitude::REAL, ?::REAL, ?::REAL ) / 1609.344 ) <= 5", prefsStr, lat, long).joins("JOIN restaurant_theme ON restaurant_vital.id = restaurant_theme.id JOIN restaurant_times ON restaurant_times.id = restaurant_vital.id").where("rating::REAL >= 3.0").where("day = ? AND to_timestamp(?, ?)::time without time zone BETWEEN open AND close", weekDay, curTime, formatStr).limit(3).order("RANDOM()")
     		end
     	end
 
@@ -105,7 +105,7 @@ class HomeController < ApplicationController
     	end
 
     	#query using homelat/homelong - preload data for toggle
-    	@home_suggestions = RestaurantVital.where("restaurant_vital.restaurant_type ilike any ( array[?] ) AND address like ?", prefsStr, zip).joins("JOIN restaurant_theme ON restaurant_vital.id = restaurant_theme.id JOIN restaurant_times ON restaurant_times.id = restaurant_vital.id").where("char_length(price) <= ? AND rating::REAL >= 3.0", maxPrice).where("day = ? AND to_timestamp(?, ?)::time without time zone BETWEEN open AND close", weekDay, curTime, formatStr).limit(3).order("RANDOM()")
+    	@home_suggestions = RestaurantVital.select("*").where("restaurant_vital.restaurant_type ilike any ( array[?] ) AND address like ?", prefsStr, zip).joins("JOIN restaurant_theme ON restaurant_vital.id = restaurant_theme.id JOIN restaurant_times ON restaurant_times.id = restaurant_vital.id").where("char_length(price) <= ? AND rating::REAL >= 3.0", maxPrice).where("day = ? AND to_timestamp(?, ?)::time without time zone BETWEEN open AND close", weekDay, curTime, formatStr).limit(3).order("RANDOM()")
     	#print @home_suggestions[1]["name"] + "\n\n"
 
     	#go through recs and tag the ones that are suggested for the user - not resulting directly from their prefs
