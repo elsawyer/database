@@ -75,8 +75,8 @@
                         		<fieldset>
 		                        	<div class="form-top">
 		                        		<div class="form-top-left">
-		                        			<h3><strong>Step 1 / 4</strong></h3>
-		                            		<p>Let us know about yourself!</p>
+		                        			<h3><strong>Step 1 / 5</strong></h3>
+		                            		<p>Tell us about yourself!</p>
 		                        		</div>
 		                        		<div class="form-top-right">
 		                        		</div>
@@ -97,7 +97,7 @@
 			                    <fieldset>
 		                        	<div class="form-top">
 		                        		<div class="form-top-left">
-		                        			<h3>Step 2 / 4</h3>
+		                        			<h3>Step 2 / 5</h3>
 		                            		<p>Food Preferences:</p>
 		                        		</div>
 		                        		<div class="form-top-right">
@@ -167,15 +167,17 @@
 								<fieldset>
 			                    <div class="form-top">
 		                        		<div class="form-top-left">
-		                        			<h3><strong>Step 3 / 4</strong></h3>
+		                        			<h3><strong>Step 3 / 5</strong></h3>
 		                            		<p>Price Range</p>
 		                        		</div>
 		                        		<div class="form-top-right">
 		                        		</div>
 		                            </div>
 		                            <div class="form-bottom">
+
 										<div style="text-align: center;" class="slider" id=moneyslider>
 											<input type="range" id="money_slide" name="money_slide" min="1" max="4" value="1" step="1" onchange="showValue(this.value)" />
+
 											<span id="range">$</span>
 											<script type="text/javascript">
 											function showValue(newValue)
@@ -190,11 +192,42 @@
 				                        <button type="button" class="btn btn-next">Next</button>
 				                    </div>
 			                    </fieldset>
-
+								<fieldset>
+		                        	<div class="form-top">
+		                        		<div class="form-top-left">
+		                        			<h3>Step 4 / 5</h3>
+		                            		<p>Less Data: Would you rather travel further or pay more to meet your preferences?</p>
+		                        		</div>
+		                        		<div class="form-top-right">
+		                        		</div>
+		                            </div>
+		                            <div class="form-bottom">
+										<div class="outlier">
+				                        <label class="switch">
+											<input type="checkbox" onchange="showPreference()" id=outlier>
+											<div class="slider outlier round"></div>
+										</label>
+										</div>
+										<div class="outlierTextBox">
+											<span id="outlierText">Travel Further</span>
+											</div>
+											<script type="text/javascript">
+											function showPreference(){
+												var x = "Pay More Money";
+												if(document.getElementById("outlier").checked){
+													x = "Travel Further";
+												}
+												document.getElementById("outlierText").innerHTML = x;
+											}
+											</script>
+										<button type="button" class="btn btn-previous">Previous</button>
+				                        <button type="submit" class="btn">Show results!</button>
+				                    </div>
+			                    </fieldset>
 			                    <fieldset>
 		                        	<div class="form-top">
 		                        		<div class="form-top-left">
-		                        			<h3>Step 4 / 4</h3>
+		                        			<h3>Step 5 / 5</h3>
 		                            		<p>Set up your account:</p>
 		                        		</div>
 		                        		<div class="form-top-right">
