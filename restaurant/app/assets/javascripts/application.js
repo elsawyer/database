@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require tether
+//= require underscore
+//= require gmaps/google
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require turbolinks

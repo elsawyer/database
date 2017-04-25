@@ -14,40 +14,41 @@
 </head>
 
 <body>
-	<%- unless @lat_lng %>
-	<script>
-		getGeoLocation();
-	</script>
-	<%- end %>
 	<div class="header" style="padding-bottom: 30px;">
-		<h1><a href="/register/register">Out2Eat</a></h1>
+		<h1 style="padding-top: 20px"><a href="/home/index" style="text-decoration:none;color:#fffff!important;">Out2Eat</a></h1>
 	</div>
 	<div class="row" >
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
-			<div class="card-deck">
+			<div class="card-deck" style="padding-bottom:80px">
 			  <div class="card">
-			    <img class="card-img-top" src="..." alt="Card image cap">
+			  	<div class="card-img-top" style='width: 100%;'>
+  					<img style="width:100%" src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @suggestions[0]['address'].dup.gsub!(' ', '%20')  %>&zoom=17&scale=false&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C<%= @suggestions[0]['address'].dup.gsub!(' ', '%20') %>&key=AIzaSyDZuvmaxXPooODOdaNIPO8ux5yHERlFN5U">
+				</div>
 			    <div class="card-block">
 			      <h4 class="card-title"><%= @suggestions[0]['name'] %></h4>
-			      <p class="card-text">Location: <%= @suggestions[0]['location'] %></p>
+			      <p class="card-text">Location: <%= @suggestions[0]['address'] %></p>
 			      <p class="card-text">Phone: <%= @suggestions[0]['phone'] %></p>
 			    </div>
 			  </div>
 			  <div class="card">
-			    <img class="card-img-top" src="..." alt="Card image cap">
+			  	<div class="card-img-top" style='width: 100%;'>
+  					<img style="width:100%" src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @suggestions[1]['address'].dup.gsub!(' ','%20')  %>&zoom=17&scale=false&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C<%= @suggestions[1]['address'].dup.gsub!(' ', '%20') %>&key=AIzaSyDZuvmaxXPooODOdaNIPO8ux5yHERlFN5U">
+				</div>
 			    <div class="card-block">
 			      <h4 class="card-title"><%= @suggestions[1]['name'] %></h4>
-			      <p class="card-text">Location: <%= @suggestions[1]['location'] %></p>
+			      <p class="card-text">Location: <%= @suggestions[1]['address'] %></p>
 			      <p class="card-text">Phone: <%= @suggestions[1]['phone'] %></p>
 			    </div>
 			  </div>
 			  <% if @suggestions[2] %>
 				  <div class="card">
-				    <img class="card-img-top" src="..." alt="Card image cap">
+				    <div class="card-img-top" style='width: 100%;'>
+  						<img style="width:100%" src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @suggestions[2]['address'].dup.gsub!(' ','%20')  %>&zoom=17&scale=false&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C<%= @suggestions[2]['address'].dup.gsub!(' ', '%20') %>&key=AIzaSyDZuvmaxXPooODOdaNIPO8ux5yHERlFN5U">
+					</div>
 				    <div class="card-block">
 				      <h4 class="card-title"><%= @suggestions[2]['name'] %></h4>
-				      <p class="card-text">Location: <%= @suggestions[2]['location'] %></p>
+				      <p class="card-text">Location: <%= @suggestions[2]['address'] %></p>
 				      <p class="card-text">Phone: <%= @suggestions[2]['phone'] %></p>
 				    </div>
 				  </div>
@@ -58,8 +59,6 @@
 
 		<div class="col-md-1"></div>
 	</div>
-
-    <!-- /Start your project here-->
 
 </body>
 

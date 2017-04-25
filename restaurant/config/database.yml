@@ -17,8 +17,8 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: <%= ENV['USERNAME'] %>
-  password: <%= ENV['PASSWORD'] %>
+  username: elsawyer
+  password: p3s4a2
   host: db.cs.wm.edu
   port: 5432
   # For details on connection pooling, see rails configuration guide
@@ -27,6 +27,10 @@ default: &default
 
 development:
   <<: *default
+  host: db.cs.wm.edu
+  port: 5432
+  username: elsawyer
+  password: p3s4a2
   database: rnrambad
 
   # The specified database role being used to connect to postgres.
@@ -84,6 +88,8 @@ test:
 #
 production:
   <<: *default
+  host: db.cs.wm.edu
+  port: 5432
+  username: elsawyer
+  password: p3s4a2
   database: rnrambad
-  username: <%= ENV['USERNAME'] %>
-  password: <%= ENV['PASSWORD'] %>
