@@ -41,7 +41,7 @@ class RegisterController < ApplicationController
 			Userlike.create(:userid=>@email, :foodlike=>"chinese", :islike=>TRUE)
 		end
 		if @breakfast
-			Userlike.create(:userid=>@email, :foodlike=>"breakfast", :islike=>TRUE)
+			Userlike.create(:userid=>@email, :foodlike=>"breakfast_brunch", :islike=>TRUE)
 		end
 		if @american
 			Userlike.create(:userid=>@email, :foodlike=>"tradamerican", :islike=>TRUE)

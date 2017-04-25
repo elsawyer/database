@@ -38,7 +38,11 @@ class HomeController < ApplicationController
 		userData = User.where("userid = ?", @user)[0]
 		maxPrice = userData["maxprice"]
 		distance = userData["travel"]
-		zip = "%" + userData["zip"].to_s
+		zip = userData["zip"]
+
+		location = Geocoder.search(zip)[0].data["geometry"]["location"]
+		homelat = location["lat"]
+		homelong = location["lng"]
 
 		#query the userlikes db to get user selected preferences
 		userPrefs = Userlike.select("foodlike").where("userid = ? AND isLike=TRUE", @user)
@@ -96,16 +100,30 @@ class HomeController < ApplicationController
 
     	@sug = @suggestions
 
-    	@suggestions.each do |suggestion|
-    		types = suggestion["restaurant_type"]
-    		#if type is recommended and not pref'd, then add necessary elements
-    		if (prefs.any? {|word| types.include? word}) == false and (recd.any? {|word| types.include? word}) == true
-    			print "FOUND A REC!\n\n"
+    	#@suggestions.each do |suggestion|
+    	#	types = suggestion["restaurant_type"]
+    	#	#if type is recommended and not pref'd, then add necessary elements
+    	#	if (prefs.any? {|word| types.include? word}) == false and (recd.any? {|word| types.include? word}) == true
+    	#		print "FOUND A REC!\n\n"
+    	#	end
+    	#end
+
+    	#query using homelat/homelong - preload data for toggle
+    	@home_suggestions = RestaurantVital.select("*").where("restaurant_vital.restaurant_type ilike any ( array[?] ) AND ( distance ( latitude::REAL, longitude::REAL, ?::REAL, ?::REAL ) / 1609.344 ) <= 5", prefsStr, homelat, homelong ).joins("JOIN restaurant_theme ON restaurant_vital.id = restaurant_theme.id JOIN restaurant_times ON restaurant_times.id = restaurant_vital.id").where("char_length(price) <= ? AND rating::REAL >= 3.0", maxPrice).limit(3).order("RANDOM()")
+    	#try to handle "dead zones" where user's preferences are too specific for the area
+    	if @home_suggestions.length < 2
+    		print "in home suggestion"
+    		#night-owl mode: check the time and see if its too late for anything to be open
+    		#if user is willing to travel first, then increase distance by 10 miles
+    		if distance == true
+    			@home_suggestions  = RestaurantVital.select("*").where("restaurant_vital.restaurant_type ilike any ( array[?] ) AND ( distance ( latitude::REAL, longitude::REAL, ?::REAL, ?::REAL ) / 1609.344 ) <= 15", prefsStr, homelat, homelong ).joins("JOIN restaurant_theme ON restaurant_vital.id = restaurant_theme.id JOIN restaurant_times ON restaurant_times.id = restaurant_vital.id").where("char_length(price) <= ? AND rating::REAL >= 3.0", maxPrice).where("day = ? AND to_timestamp(?, ?)::time without time zone BETWEEN open AND close", weekDay, curTime, formatStr).limit(3).order("RANDOM()")
+    		end
+    		#if user is willing to increase price first, drop price constraint
+    		if distance == false
+    			@home_suggestions  = RestaurantVital.select("*").where("restaurant_vital.restaurant_type ilike any ( array[?] ) AND ( distance ( latitude::REAL, longitude::REAL, ?::REAL, ?::REAL ) / 1609.344 ) <= 5", prefsStr, homelat, homelong ).joins("JOIN restaurant_theme ON restaurant_vital.id = restaurant_theme.id JOIN restaurant_times ON restaurant_times.id = restaurant_vital.id").where("rating::REAL >= 3.0").where("day = ? AND to_timestamp(?, ?)::time without time zone BETWEEN open AND close", weekDay, curTime, formatStr).limit(3).order("RANDOM()")
     		end
     	end
 
-    	#query using homelat/homelong - preload data for toggle
-    	@home_suggestions = RestaurantVital.select("*").where("restaurant_vital.restaurant_type ilike any ( array[?] ) AND address like ?", prefsStr, zip).joins("JOIN restaurant_theme ON restaurant_vital.id = restaurant_theme.id JOIN restaurant_times ON restaurant_times.id = restaurant_vital.id").where("char_length(price) <= ? AND rating::REAL >= 3.0", maxPrice).where("day = ? AND to_timestamp(?, ?)::time without time zone BETWEEN open AND close", weekDay, curTime, formatStr).limit(3).order("RANDOM()")
     	#print @home_suggestions[1]["name"] + "\n\n"
 
     	#go through recs and tag the ones that are suggested for the user - not resulting directly from their prefs
