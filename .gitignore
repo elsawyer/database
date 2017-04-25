@@ -1,3 +1,5 @@
 /restaurant/config/app_env.rb
 /restaurant/tmp/cache/assets/sprockets/*
-log/development.log
+/restaurant/log/development.log
+/restaurant/log/production.log
+
